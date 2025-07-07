@@ -1,14 +1,18 @@
 FROM node:alpine AS builder
 
+RUN apk add --no-cache curl && \
+    npm config set registry https://registry.npmjs.org/ && \
+    npm config set fetch-retry-mintimeout 20000 && \
+    npm config set fetch-retry-maxtimeout 120000
+
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm config set registry https://registry.npmmirror.com && \
-    npm ci
+RUN echo "Installing dependencies..." && \
+    npm ci --prefer-offline --no-audit
 
 COPY . .
-
 RUN npm run build
 
 FROM node:alpine
