@@ -4,8 +4,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN echo "Installing dependencies..." && \
-    npm ci --prefer-offline --no-audit
+RUN npm ci
 
 COPY . .
 RUN npm run build
