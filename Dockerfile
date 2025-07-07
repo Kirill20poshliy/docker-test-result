@@ -1,9 +1,4 @@
-FROM node:22-alpine AS builder
-
-RUN apk add --no-cache curl && \
-    npm config set registry https://registry.npmjs.org/ && \
-    npm config set fetch-retry-mintimeout 20000 && \
-    npm config set fetch-retry-maxtimeout 120000
+FROM node:22-bullseye-slim AS builder
 
 WORKDIR /app
 
@@ -15,7 +10,7 @@ RUN echo "Installing dependencies..." && \
 COPY . .
 RUN npm run build
 
-FROM node:22-alpine
+FROM node:22-bullseye-slim
 
 WORKDIR /app
 
