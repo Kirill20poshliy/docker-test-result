@@ -1,11 +1,22 @@
+FROM node:alpine AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm config set registry https://registry.npmmirror.com && \
+    npm ci
+
+COPY . .
+
+RUN npm run build
+
 FROM node:alpine
 
-WORKDIR /usr/app/backend
+WORKDIR /app
+
+COPY --from=builder /app .
 
 EXPOSE 3000
-
-COPY ./ /usr/app/backend
-
-RUN npm ci && npm run build
 
 CMD ["node", "dist/index.js"]
