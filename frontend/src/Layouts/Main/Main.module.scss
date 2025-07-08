@@ -1,0 +1,28 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    align-items: center;
+    padding: 1rem 6.25rem;
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        .search {
+            padding: .5rem;
+            border-radius: .25rem;
+            border: 1px solid black;
+        }
+    }
+
+    .item {
+        padding: 1rem;
+        -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        width: 100%;
+        border-radius: .75rem;
+    }
+}
